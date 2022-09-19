@@ -1,3 +1,4 @@
+from itertools import product
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -20,6 +21,11 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.name
+	@classmethod	
+	def search_product (cls,search_term):
+		products = cls.objects.filter(name__icontains=search_term)
+		return products
+
 
 	@property
 	def imageURL(self):
